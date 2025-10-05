@@ -1,0 +1,439 @@
+= Java Foundations certification
+:toc: left
+:sectlinks:
+:sectanchors:
+:sectnums:
+:source-highlighter: pygments
+:exam-url: https://education.oracle.com/java-foundations/pexam_1Z0-811
+:pro-url: https://education.oracle.com/java-se-21-developer-professional/pexam_1Z0-830
+
+{exam-url}[Exam description (1Z0-811)] 
+
+== What Is Java?
+
+=== Describe the features of Java
+* *Object Oriented* - Java is an object-oriented language, 
+* *Platform Independent, WORA* - Java code compiles to a _virtual machine_, the JVM, which makes it _platform indepentent_. It is easy for java programs to run in any platform for which there's a JVM, and the programs don't usually need to know which platform they're running on. The marketing term for this is WORA - Write Once Run Anywhere.
+
+
+=== Describe the real-world applications of Java
+
+== Java Basics
+
+=== Describe the Java Development Kit (JDK) and the Java Runtime Environment (JRE)
+
+* The _Java Runtime Environment_, *JRE* is needed to _run_ java programs. It contains an implementation of the JVM, and all the standard libraries.
+
+* The _Java Development Kit_, *JDK* is needed to _develop_ (_compile_) Java programs. It usually includes a JRE, plus a java compiler.
+
+* Many developers use other build systems, like Maven or Gradle to build complicated java programs.
+
+=== Describe the components of object-oriented programming
+
+* **Encapsulation** - 
+* **Inheritance** -
+* **Interfaces** -
+* **Polymorphism** - 
+
+=== Describe the components of a basic Java program
+=== Compile and execute a Java program
+* You define the _source_ code, which needs to be translated or _compiled_ into a format the JVM can understand and execute, which we call _byte code_. 
+
+* The java compiler is usually called *javac*. To compile one java file, you'd type javac and then the java file name or path, for example to compile the XYZ.java file if you're in the same folder, you'd type: `javac XYZ.java`.
+
+* Keep in mind the package names and the folder structure are usually corresponding in java, so if your class is in the com.okaram.samples package, the compiler will expect to find the other classes in the com/okaram/samples folder, so you'd be in the parent folder and typing `javac com/okaram/samples/XYZ.java`
+
+* Also, in many cases, you'd use a build program, like gradle or maven, but we won't go over those here.
+
+* To _run_ a java program, you normally use the *java* program, and pass it the full name of the class (including the package)
+
+==== Exercises
+* Compile and run the HelloWorld java program.
+
+[source]
+----
+javac com/okaram/samples/HelloWorld.java
+java com.okaram.samples.HelloWorld
+----
+
+== Basic Java Elements
+
+=== Identify the conventions to be followed in a Java program
+=== Use Java reserved words
+Java reserved words, like `if` or `int` _cannot_ be used as identifiers.
+
+Reserved words include:
+
+* *Data Types*: byte, short, int, long, float, double, char, boolean
+* *Control Flow*: if, else, switch, case, default, while, do, for, continue, break, return 
+* *Class/Object Related*: private, protected, public, static, final, abstract, native, transient, volatile, class, interface, enum, extends, implements, new, this, super, instanceof
+* *Exception Handling*: try, catch, finally, throw, throws, assert
+* *Other*: void, package, import, strictfp (old usage),goto and const (unused)
+* *Reserved Literals*: true (boolean literal), false (boolean literal), and null (reference literal).
+
+=== Use single-line and multi-line comments in Java programs
+* Single line comments start with two forward slashes `//` and continue until the end of the line. Everything in that line after the `//` is ignored by the compiler.
+
+* Multi-line comments start with `/\*` and end with `*/`. Everything between those markers is ignored by the compiler.
+
+[source, java]
+----
+int a; // this is ignored
+
+/* and this too
+   - maybe with many lines
+   - people do all sorts of things to make it look pretty
+*********************************************************** */
+----
+
+
+=== Import other Java packages to make them accessible in your code
+
+Importing a class or package allows you to refer to the class without specifying the full name (which classes are accessible is determined at run time, by the CLASSPATH)
+[source, java]
+----
+import java.util.*; // imports all classes from that package
+import java.util.Random; // imports one class
+----
+
+=== Describe the java.lang package
+
+The https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/package-summary.html[java.lang] package contains many useful classes, and it is imported by default. Includes: Object, Class, Math, Integer etc, String, StringBuffer, StringBuilder.
+
+== Working with Java Data Types
+
+=== Declare and initialize variables including a  variable using final
+* You define a variable by typing its intended type, followed by its name. You can also assign it a value when defining it. Examples:
+
+[source,java]
+----
+int a;
+double b=7.0;
+boolean canISucceed=true;
+Person p=new Person("Jane","Smith");
+----
+
+* You can define several variables of the same type by writing the type, and then their names, separated by commas. You can also assign values to some or all of the variables.
+
+[source,java]
+----
+int a,b;
+double b=7.0,c,d=3.5;
+boolean canISucceed=true;
+----
+
+* If you're assigning, you can also use the keyword `var` instead of a type, and let java infer the type from the type of the value (but be careful, as the type may not be exactly what you want).
+
+[source,java]
+----
+var i=3; // what's the type?
+var first_name="Orlando", last_name="Karam";
+----
+
+* The `final` keyword is used to define a variable which cannot be reassigned. Once the variable has been assigned into it cannot be reassigned. (NOTE- JShell will ignore the final keyword for top-level variables).
+[source,java]
+----
+final int f=(float)3.5; 
+f=f+1; // ERROR! f is final
+----
+
+=== Cast a value from one data type to another including automatic and manual promotion
+
+* Java is a strongly and statically typed language, so the value on the right hand side of an assignment operator has to be of the same type as the variable it is being assigned to. Some times, Java will automatically cast or convert from one type to another, but many times you need to explicitly _cast_ a a value to another time. You cast by writing the desired type between parenthesis, next to the value, like `(int)a`
+
+[source,java]
+----
+float f=(float)3.5; // floating point literals are doubles, so we need to cast to float
+int i=(int)f; // The casting is also required here
+----
+
+=== Declare and initialize a String variable
+* String is a class in java, and so you can declare 
+[source,java]
+----
+String first="Jane", last="Doe";
+String full=first+' '+last; // notice ' ' can be used since it's ONE character
+----
+
+== Working with Java Operators
+
+=== Use basic arithmetic operators to manipulate data including +, -, *, /, and %
+* Java supports the basic arithmetic operators, `+`, `-`, `*`, and `/`, with more or less their usual meaning in math.
+
+* For _integers_, the division operator, `/`, does _integer division_, and the `%` operator returns the modulo or remainder of the division operator. If you want to do floating point division, you'd need to cast  one or both operands.
+
+==== Exercises
+1. Using *jshell*, play with these operators and define your own expressions. Do you always get the expressions you expect?
+
+=== Questions
+1. What would be the value of d at the end of the following block?
+[source,java]
+----
+int a=10, b=5;
+int c= a*b-1;
+int d= c-a-1;
+----
+
+.Answer
+[%collapsible]
+====
+38
+
+[source,java]
+----
+int a=10, b=5; 
+int c= a*b-1; // c=10*5-1, given precedence c=50-1=49
+int d= c-a-1; // d= 49-10-1 = 38
+----
+====
+
+[start=2]
+. What would be the value of d at the end of the following block?
+[source,java]
+----
+int a=1, b=3;
+int c= a*b+3*b;
+int d= c*(a+b)
+----
+
+.Answer
+[%collapsible]
+====
+48
+
+[source,java]
+----
+int a=1, b=3; 
+int c= a*b+3*b; // given precedence of operators, c= 1*3 + 3*3 = 3+9 = 12 
+int d= c*(a+b); // d= 12*(1+3) = 48
+----
+====
+
+=== Use the increment and decrement operators
+* Incrementing and decrementing (by one) occur often, and so Java has specialized operators for this. ++ for incrementing and -- for decrementing a variable.
+
+* These operators produce a value, and as a _side effect_, they increment or decrement the variable. Here, there's a subtle difference between {plus}{plus}i and i{plus}{plus}. The first one returns the *incremented* value of i, whereas the last one returns the *original* value of i. It is usually a bad idea to rely on this difference, as it may confuse readers of your code.
+
+=== Use relational operators including ==, !=, >, >=, <, and \<=
+The _relational_ or _comparison_ operators allow you to compare two numbers or entities. They return a boolean value, either true or false.
+* `==` Are these numbers the same?
+* `!=` not equal, are they different
+* >, >=, <, <= have the obvious meaning (if they aren't obvious test them, with jshell) 
+
+=== Use arithmetic assignment operators
+The arithmetic assignment operators allow you to shorten an expression when you're assigning to a variable and using that same variable as one of the operands of a binary operator. For example:
+
+[source,java]
+----
+int a=1;
+a+=3; // same as a=a+3 
+----
+
+This works with all binary operators.
+
+=== Use conditional operators including &&, ||, and ?
+
+* In Java, && and || are used to combine booleans. && is and, and || is or.
+
+* The ternary operator, ? evaluates to one of two values, depending on whether a boolean expression is true or false.
+[source,java]
+----
+int a=7;
+int b= (a%2==0? 1:2 ); // if a%2 is 0, that is if a is even, evaluate to 1, else to 2
+----
+
+=== Describe the operator precedence and use of parenthesis
+
+== Working with the String Class
+
+=== Develop code that uses methods from the String class
+=== Format Strings using escape sequences including %d, %n, and %s
+
+== Working with the Random and Math Classes
+
+=== Use the Random class
+
+[source,java]
+----
+include::com/okaram/samples/Dice.java[]
+----
+
+=== Use the Math class
+
+* The https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html[java.lang.math class] defines several useful math functions including:
+    ** Trigonometric functions, _sin_, _cos_ etc and hyperbolic _sinh_ etc
+    ** _sqrt_, returns the square root of a number.
+    ** _abs_, to get the absolute value of a number
+    ** _max_ and _min_, to get the maximum or minimum of two numbers
+    ** _floor_ and _ceil_, to get the floor (highest integer lower than) or ceiling of a double. Notice the result is a double, you'd need to cast if if you want an integer.
+    ** _pow_, which raises a number to a given power
+    ** logarithms (_log_,_log10_) and exponential (_exp_) functions
+* Example: A method to solve the quadratic equation ax2+bx+c could be:
+
+====
+[source,java]
+----
+include::com/okaram/samples/MathSamples.java[lines=5..7]
+----
+====
+
+== Using Decision Statements
+
+=== Use the decision making statement  (if-then and if-then-else)
+* The *if* statement is used in java to make decisions. After the keyworkd `if`, you write a boolean expression in parentheses (the parentheses are part of the syntax), and then one statemen, or a block enclosing several statements. If the condition is true, the statements will be executed.
+
+====
+[source,java]
+----
+include::com/okaram/samples/IfSamples.java[lines=15..18]
+----
+====
+
+* You can also add an *else* statement or block to the `if`, which gets executed only if the condition is false. With an if-then-else statement, exactly one of the branches gets executed.
+
+[source,java]
+----
+include::com/okaram/samples/IfSamples.java[lines=20..24]
+----
+
+[source,java]
+----
+include::com/okaram/samples/IfSamples.java[lines=27..44]
+----
+
+==== Exercises
+1. Define your own class, with a method monthOfYear, that use if statements to transform a numeric month to the name of the month, where 1=January, 12=December.
+2. Do you know or are you trying to learn another language? Implement the dayOfWeek and monthOfYear methods for that language using only if statements.
+
+=== Use the switch statement
+
+[source,java]
+----
+include::com/okaram/samples/SwitchSamples.java[lines=4..30]
+----
+
+==== Exercises
+1. Define your own class, with a method monthOfYear, that uses a switch statement to transform a numeric month to the name of the month, where 1=January, 12=December.
+2. Do you know or are you trying to learn another language? Implement the dayOfWeek and monthOfYear methods for that language.
+
+=== Compare how == differs between primitives and objects
+* When dealing with objects, == compares whether two reference values refer to _the exact same_ object.
+
+* The .equals method, is supposed to return whether the two objects are logically equal in value. The default operator returns the same as ==, so when you define your own classes, you probably want to override it.
+
+=== Compare two String objects by using the compareTo and equals methods
+
+* Although Strings are objects, Java provides String literals, and it optimizes many of its operations, so that two strings with the same value will actually be the same object. This is not a problem, since strings are immutable.
+* Since strings refer to the same object, they can many times be compared with `==`. However, other operations, in particular, `new`, will can create a different string object.
+
+* The compareTo method of the string class allows you to compare strings not just for equality but for whether they're alphabetically or lexicographically greater or smaller. It returns a negative,0, or positive value, depending on whether the strings are smaller, equal or grater.
+    ** `"a".compareTo("b")`, for example, would return -1 (or any other negative number), since a is smaller, or comes before alphabetically than b.
+    ** `"abc".compareTo("aba")` returns a positive number, since abc goes after aba.
+    ** `"abc".compareTo("abc")` returns 0 since the strings are equal.
+
+== Using Looping Statements
+
+=== Describe looping statements
+
+A *loop* allows you to execute a block many number of steps, depending on whether a *condition* is true. The executed block usually alters the values evaluated in the condition, or you end up with an infinite loop.
+
+Within the block of a loop, the keyword *break* will make execution get out of the loop, and the keyword *continue* will skip the rest of the block and evaluate the condition again.
+
+Java supports the following loops:
+* *while* loop, where its block is executed as long as its conditions is true. It may not execute its block if the condition is not true when entering the loop.
+
+* *do-while* loop
+* *for* loop
+* *enhanced for* loop
+
+=== Use a while loop
+
+[source,java]
+----
+include::com/okaram/samples/WhileSamples.java[lines=7..19]
+----
+
+[source,java]
+----
+include::com/okaram/samples/WhileSamples.java[lines=21..28]
+----
+
+[source,java]
+----
+include::com/okaram/samples/WhileSamples.java[lines=30..38]
+----
+
+=== Use a for loop including an enhanced for loop
+
+
+=== Use a do-while loop
+[source,java]
+----
+include::com/okaram/samples/DoWhileSamples.java[lines=7..19]
+----
+
+[source,java]
+----
+include::com/okaram/samples/DoWhileSamples.java[lines=21..30]
+----
+
+// [source,java]
+// ----
+// include::com/okaram/samples/WhileSamples.java[lines=32..40]
+// ----
+
+=== Compare and contrast the for, while, and do-while loops
+
+* The *while* loop
+* The *for* loop combines a while loop, with its initalization and increment. It separates the initialization, condition and increment with semicolons.
+* The *enhanced for* loop 
+* The *do-while* loop executes at least once. It first executes the block and _then_ checks the condition. 
+
+=== Develop code that uses break and continue statements
+
+== Debugging and Exception Handling
+
+=== Identify syntax and logic errors
+=== Use exception handling
+=== Handle common exceptions thrown
+=== Use try and catch blocks
+
+== Arrays and ArrayLists 
+
+=== Use a one-dimensional array
+=== Create and manipulate an ArrayList
+=== Traverse the elements of an ArrayList by using iterators and loops including the enhanced for loop
+=== Compare an array and an ArrayList
+
+== Classes and Constructors
+
+=== Create a new class including a main method
+[source,java]
+----
+include::com/okaram/samples/HelloWorld.java[]
+----
+
+[source,java]
+----
+include::com/okaram/samples/Person.java[]
+----
+
+=== Use the private modifier
+=== Describe the relationship between an object and its members
+=== Describe the difference between a class variable, an instance variable, and a local variable
+
+[source,java]
+----
+include::com/okaram/samples/Dice.java[]
+----
+
+=== Develop code that creates an object's default constructor and modifies the object's fields
+=== Use constructors with and without parameters
+=== Develop code that overloads constructors
+
+== Java Methods
+
+=== Describe and create a method
+=== Create and use accessor and mutator methods
+=== Create overloaded methods
+=== Describe a static method and demonstrate its use within a program
