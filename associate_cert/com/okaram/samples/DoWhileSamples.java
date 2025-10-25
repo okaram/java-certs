@@ -14,7 +14,7 @@ public class DoWhileSamples {
             answer=scanner.nextLine().toLowerCase();
             if (!answer.equals("yes") && !answer.equals("no"))
                 System.out.print("Sorry, that's not a valid input. Please enter yes or no");
-        } while (!answer.equals("yes") && !answer.equals("no")) 
+        } while (!answer.equals("yes") && !answer.equals("no"));
         return answer.equals("yes");
     }
     

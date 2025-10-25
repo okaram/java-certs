@@ -365,6 +365,23 @@ include::com/okaram/samples/WhileSamples.java[lines=30..38]
 
 === Use a for loop including an enhanced for loop
 
+A common pattern for loops involves you initializing a variable before the loop, checking its value in the condition of a while loop, and somehow incrementing or changing that variable inside the loop on each iteration. A `for` loop just puts those things in one place, separated with semicolons. 
+
+For example, to print the numbers from 1  to 10 you would write:
+[source,java]
+----
+for(int i=1;i<=10;++i)
+    System.out.println(i);
+----
+
+The enhanced for loop is used to iterate over a collection, like an array.
+[source,java]
+----
+int nums[]={1,2,3,4,5,6,7}
+for(var num: nums)
+    System.out.println(num);
+----
+
 
 === Use a do-while loop
 [source,java]
@@ -394,13 +411,57 @@ include::com/okaram/samples/DoWhileSamples.java[lines=21..30]
 == Debugging and Exception Handling
 
 === Identify syntax and logic errors
+
+* _syntax_ errors will be caught by the compiler, your code doesn't compile.
+* _logic_ errors cause your program to behave in a way you didn't intend it. The program will compile, but it will produce the wrong results.
+
 === Use exception handling
+
+* Java supports structured exception handling. Any method can raise an _exception_, and whoever calls that method can _catch_ that exception and handle it. 
+* If an exception is raised and there's no exception handler, the program will print information about the exception and stop.
+* Java has two types of exceptions, _runtime_ or _unchecked_ exceptions, which are supposed to be due to truly exceptional circumstances, which cannot be handled well, and _checked_ exceptions, which signal an input or logical error in your application, and which you should catch.
+* Checked exceptions _have_ to be either caught or declared to be thrown in your code.
+
 === Handle common exceptions thrown
+
+You can define your own exception classes, inheriting from Exception or one of its subclasses. For example:
+
+[source,java]
+----
+include::com/okaram/samples/ExceptionSamples.java[lines=5..9]
+----
+
+or, extending RuntimeException
+
+[source,java]
+----
+include::com/okaram/samples/ExceptionSamples.java[lines=12..16]
+----
+
+And you could throw an exception with the `throw` keyword. For example:
+[source,java]
+----
+include::com/okaram/samples/ExceptionSamples.java[lines=21..28]
+----
+
 === Use try and catch blocks
+To catch an exception, you enclose the lines that could cause an exception in a `try` block, and then add `catch` clauses. For example:
+[source,java]
+----
+include::com/okaram/samples/ExceptionSamples.java[lines=31..41]
+----
+
 
 == Arrays and ArrayLists 
 
 === Use a one-dimensional array
+* In java you can declare array variables, and the initialize them, either with a constant or by calling new.
+
+[source,java]
+----
+include::com/okaram/samples/ArraySamples.java[lines=6..10]
+----
+
 === Create and manipulate an ArrayList
 === Traverse the elements of an ArrayList by using iterators and loops including the enhanced for loop
 === Compare an array and an ArrayList
