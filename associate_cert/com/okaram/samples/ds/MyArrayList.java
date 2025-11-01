@@ -16,7 +16,7 @@ public class MyArrayList implements Iterable<Integer>{
             return elements[current-1];
         }
     }
-    
+
     public Iterator<Integer> iterator() {
         return new MyIterator();
     }
@@ -47,5 +47,17 @@ public class MyArrayList implements Iterable<Integer>{
         int tmp=elements[index];
         elements[index]=value;
         return tmp;
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder sb=new StringBuilder();
+        sb.append("[ ");
+        for(int i=0;i<size;++i){
+            sb.append(elements[i]);
+            sb.append(", ");
+        }
+        sb.append("]");
+        return sb.toString();
     }
 }
