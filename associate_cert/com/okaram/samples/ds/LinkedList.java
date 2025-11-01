@@ -18,7 +18,7 @@ public class LinkedList {
     Node head=null;
 
     // adds at the *beginning* of the list
-    void push(int value){
+    public void push(int value){
         head=new Node(value,head);
     }
 
