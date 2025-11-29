@@ -65,10 +65,8 @@ public class BinaryTree {
     public static BinaryTree makeExpressionTree(){
         BinaryTree tree = new BinaryTree();
         tree.root = new Node(new Value('+'));
-        tree.root.left = new Node(new Value(25));
-        tree.root.right = new Node(new Value(75));
-        tree.root.left.left = new Node(new Value(10));
-        tree.root.left.right = new Node(new Value(35));
+        tree.root.left = new Node(new Value('*'), new Node(new Value(5)), new Node(new Value(4)));
+        tree.root.right = new Node(new Value('-'), new Node(new Value(100)), new Node(new Value(20)));
         return tree;
     }
 
