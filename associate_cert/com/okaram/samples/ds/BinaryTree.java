@@ -1,46 +1,74 @@
 package com.okaram.samples.ds;
 
-import javax.naming.NoPermissionException;
-
 public class BinaryTree {
-    public class Node {
-        int value;
+    public static class Value{
+        enum ValueType { INT, CHAR };
+        int iValue;
+        char cValue;
+        ValueType type;
+        public Value(int value){
+            this.iValue=value;
+            this.type = ValueType.INT;
+        }
+        public Value(char value){
+            this.cValue=value;
+            this.type = ValueType.CHAR;
+        }
+
+        public String toString(){
+            if (type==ValueType.INT)
+                return Integer.toString(iValue);
+            else 
+                return Character.toString(cValue);
+        }
+    }
+    public static class Node {
+        Value value;
         Node left;
         Node right;
 
-        public Node(int value, Node left, Node right) {
+        public Node(Value value, Node left, Node right) {
             this.value = value;
             this.left = left;
             this.right = right;
         }
 
-        public Node(int value) {
+        public Node(Value value) {
             this.value = value;
             this.left = null;
             this.right = null;
         }
-
     }
 
     Node root = null;
 
     public static BinaryTree makeTree(){
         BinaryTree tree = new BinaryTree();
-        tree.root = tree.new Node(1);
-        tree.root.left = tree.new Node(2);
-        tree.root.right = tree.new Node(3);
-        tree.root.left.left = tree.new Node(4);
-        tree.root.left.right = tree.new Node(5);
+        tree.root = new Node(new Value(1));
+        tree.root.left = new Node(new Value(2));
+        tree.root.right = new Node(new Value(3));
+        tree.root.left.left = new Node(new Value(4));
+        tree.root.left.right = new Node(new Value(5))  ;
         return tree;
     }
 
     public static BinaryTree makeBSTree(){
         BinaryTree tree = new BinaryTree();
-        tree.root = tree.new Node(50);
-        tree.root.left = tree.new Node(25);
-        tree.root.right = tree.new Node(75);
-        tree.root.left.left = tree.new Node(10);
-        tree.root.left.right = tree.new Node(35);
+        tree.root = new Node(new Value(50));
+        tree.root.left = new Node(new Value(25));
+        tree.root.right = new Node(new Value(75));
+        tree.root.left.left = new Node(new Value(10));
+        tree.root.left.right = new Node(new Value(35));
+        return tree;
+    }
+
+    public static BinaryTree makeExpressionTree(){
+        BinaryTree tree = new BinaryTree();
+        tree.root = new Node(new Value('+'));
+        tree.root.left = new Node(new Value(25));
+        tree.root.right = new Node(new Value(75));
+        tree.root.left.left = new Node(new Value(10));
+        tree.root.left.right = new Node(new Value(35));
         return tree;
     }
 
@@ -61,6 +89,20 @@ public class BinaryTree {
     public String toString() {
         StringBuilder sb = new StringBuilder("\n");
         buildString(root, sb, 0);
+        return sb.toString();
+    }
+
+    private void inOrderString(Node node, StringBuilder sb) {
+        if (node == null) {
+            return;
+        }
+        inOrderString(node.left, sb);
+        sb.append(node.value).append(" ");
+        inOrderString(node.right, sb);
+    }
+    public String inOrderString() {
+        StringBuilder sb = new StringBuilder();
+        inOrderString(root, sb);
         return sb.toString();
     }
 }
