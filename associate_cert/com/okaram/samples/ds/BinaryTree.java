@@ -22,6 +22,7 @@ public class BinaryTree {
                 return Character.toString(cValue);
         }
     }
+    
     public static class Node {
         Value value;
         Node left;
@@ -37,6 +38,10 @@ public class BinaryTree {
             this.value = value;
             this.left = null;
             this.right = null;
+        }
+
+        public boolean isLeaf(){
+            return left==null && right==null;
         }
     }
 
