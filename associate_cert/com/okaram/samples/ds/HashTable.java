@@ -13,13 +13,13 @@ public class HashTable {
 
     ArrayList<ArrayList<Entry>> values=new ArrayList<ArrayList<Entry>>();
 
-    public HashTable(int size){ {
+    public HashTable(int size){ 
         for(int i=0;i<size;i++){
             values.add(new ArrayList<Entry>());
         }
     }
 
-    public HashTable(){ {
+    public HashTable(){ 
         for(int i=0;i<100;i++){
             values.add(new ArrayList<Entry>());
         }
